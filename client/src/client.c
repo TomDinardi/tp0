@@ -19,7 +19,8 @@ int main(void)
 	// Usando el logger creado previamente
 	// Escribi: "Hola! Soy un log"
 
-
+	log_info( logger, "Hola! Soy un log");
+	
 	/* ---------------- ARCHIVOS DE CONFIGURACION ---------------- */
 
 	config = iniciar_config();
@@ -54,9 +55,13 @@ int main(void)
 
 t_log* iniciar_logger(void)
 {
-	t_log* nuevo_logger;
+	t_log* logger;
 
-	return nuevo_logger;
+	if( logger = NULL ){
+		printf("Error al crear el logger.");
+		exit(1);
+	}
+	return logger;
 }
 
 t_config* iniciar_config(void)
@@ -95,6 +100,10 @@ void paquete(int conexion)
 
 void terminar_programa(int conexion, t_log* logger, t_config* config)
 {
+	if( logger != NULL ) {
+		log_destroy(logger);
+	}
+
 	/* Y por ultimo, hay que liberar lo que utilizamos (conexion, log y config) 
 	  con las funciones de las commons y del TP mencionadas en el enunciado */
 }
