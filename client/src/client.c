@@ -7,7 +7,6 @@ int main(void) {
 	char* ip;
 	char* puerto;
 	char* valor;
-	char* 
 
 	t_log* logger;
 	t_config* config;
@@ -27,7 +26,7 @@ int main(void) {
 	// Usando el logger creado previamente
 	// Escribi: "Hola! Soy un log"
 
-	log_info( logger, "Hola! Soy un log");
+	log_info(logger, "Hola! Soy un log");
 	
 	/* ---------------- ARCHIVOS DE CONFIGURACION ---------------- */
 
@@ -36,7 +35,7 @@ int main(void) {
 	if( config == NULL ) {
 
 		strcpy(err_message, "Error al crear el archivo de configuración.");
-		log_info( logger, err_message);
+		log_info(logger, err_message);
 		printf("/n %s /n", err_message);	
 		exit(EXIT_FAILURE);
 	}
@@ -108,6 +107,7 @@ t_config* iniciar_config() {
 }
 
 void leer_consola(t_log* logger) {
+
 	char* leido;
 
 	// La primera te la dejo de yapa
@@ -115,6 +115,7 @@ void leer_consola(t_log* logger) {
 
 	// El resto, las vamos leyendo y logueando hasta recibir un string vacío
 	while( leido != "\0" ) {
+
 		log_info(logger, leido);
 		leido = readline("> ");
 	}
@@ -136,10 +137,16 @@ void paquete(int conexion) {
 }
 
 void terminar_programa(int conexion, t_log* logger, t_config* config) {
+	
 	if( logger != NULL ) {
+
 		log_destroy(logger);
 	}
 
+	if ( config != NULL) {
+
+		config_destroy(config);
+	}
 	/* Y por ultimo, hay que liberar lo que utilizamos (conexion, log y config) 
 	  con las funciones de las commons y del TP mencionadas en el enunciado */
 }
@@ -147,13 +154,14 @@ void terminar_programa(int conexion, t_log* logger, t_config* config) {
 char* get_config_value(t_log* logger, t_config* config, char* key) {
 
 	char* value;
-	char* message = malloc(sizeof(char) * 40);
 
 	if( config_has_property(config, key) ) {
+
 		value = config_get_string_value(config, key);
 		log_info(logger, value);
 		return value;
 	} else {
+
 		printf("Error. No se encontró el campo buscado.");
 		log_info(logger, "Error. No se encontró el campo buscado.");
 		exit(EXIT_FAILURE);
