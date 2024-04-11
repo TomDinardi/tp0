@@ -17,4 +17,6 @@ void leer_consola(t_log*);
 void paquete(int);
 void terminar_programa(int, t_log*, t_config*);
 
+char* get_config_value(t_log* logger, t_config* config, char* key);
+
 #endif /* CLIENT_H_ */
