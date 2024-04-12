@@ -103,7 +103,7 @@ t_config* iniciar_config() {
 	t_config* nuevo_config;
 	char* path = malloc(sizeof(char) * 40);
 
-	strcpy(path, "./cliente.config");
+	strcpy(path, "../cliente.config");
 	nuevo_config = config_create(path);
 
 	free(path);
